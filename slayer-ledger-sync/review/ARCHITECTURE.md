@@ -1,0 +1,13 @@
+# Architecture and review boundaries
+
+RuneLite client-thread values → explicit SlayerSnapshot DTO → bounded, opt-in HTTPS POST → fixed Slayer Ledger endpoint → hashed-key-protected latest snapshot → browser Auto mode.
+
+There are no overlays, next-attack predictions, prayer suggestions, boss mechanics, menu actions, mouse/keyboard events, chat input changes, game packets, reflection, native code, subprocesses, runtime downloads or code loading in the production plugin. The development test launcher follows RuneLite's example template and is not a production plugin feature. The only sidebar UI is connection status. No external response is used to control RuneLite or change its settings. The website's existing strategy/DPS planning is separate from this exporter and sends no instructions back to the game.
+
+The exporter reads core SlayerPluginService task/name/count/location and named gamevals for the master, target ID, original count, points, normal/Wilderness/Mortimer counters and modifier. It checks that the service's remaining count matches the current game varp before uploading, avoiding a task/count transition mismatch. It does not read the account hash, login identifiers, passwords, chat, NPC state, equipment, other players, location, world or bank.
+
+Reviewers should consider the current restriction on plugins exposing player information over HTTP. This candidate does not listen for HTTP requests and has no unauthenticated player lookup. Its network operation is a user-consented outbound HTTPS write to a private bearer-key connection. We request the reviewers' interpretation rather than claiming this distinction guarantees acceptance. The paired data are intended only for that user's planner.
+
+The server implementation is included under `review/server-reference` for audit. Only the database's single most recent snapshot is retained. It validates the payload against an allowlist, requires the correct role-specific secret, validates character binding and a two-minute capture window, and prevents older/replayed captures replacing newer ones. APIs do not issue cross-origin CORS permissions. A read key is needed to view or revoke a connection. Browser polling is disabled in Manual mode and stale/mismatched/offline data are not treated as current.
+
+Potential review/testing points: current RuneLite API compatibility, live master ID/name mapping (including replacement NPCs), multi-client clock ordering, Konar location spelling, newly added task/boss names, and Mortimer modifier IDs/ranges. Unmapped fields are surfaced; they are not guessed. Unit tests do not replace live verification by a human after review.

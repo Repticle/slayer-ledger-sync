@@ -1,0 +1,11 @@
+Build/development scaffolding follows runelite/example-plugin.
+Gradle wrapper scripts and gradle-wrapper.jar retain their upstream notices
+and are licensed under Apache License 2.0: https://www.apache.org/licenses/LICENSE-2.0
+The wrapper JAR is the unchanged Gradle wrapper supplied by runelite/example-plugin.
+RuneLite client/API are fetched as build dependencies and are not redistributed
+in this source package. See RuneLite's BSD license: https://github.com/runelite/runelite/blob/master/LICENSE
+JUnit and all other test dependencies are resolved through Gradle; none are bundled.
+Prepared with assistance from OpenAI Codex. No RuneLite/Jagex endorsement is implied.
+The optional review/server-reference/public task/boss data adapt OSRS Wiki facts
+under CC BY-NC-SA 3.0; see their file headers and https://oldschool.runescape.wiki/.
+These are server audit reference files and are not part of the Java plugin binary.
