@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
 public class SlayerLedgerPlugin extends Plugin
 {
  // Fixed destination: no configurable URL, no local HTTP server, no inbound game-control path.
- static final String ENDPOINT="https://kuradal-slayer-ledger.gritty-tetra-8569.chatgpt.site/api/slayer-sync";
+ static final String ENDPOINT="https://slayer-companion.gritty-tetra-8569.chatgpt.site/api/slayer-sync";
  private static final Logger log=LoggerFactory.getLogger(SlayerLedgerPlugin.class);
  private static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
  @Inject private Client client;
